@@ -8,7 +8,7 @@ const apiUrl = 'https://my-movie-api-8xod.onrender.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRegistrationService {
+export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
@@ -24,7 +24,22 @@ export class UserRegistrationService {
 
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+
+    const data = {
+      userName: userDetails.username,
+      password: userDetails.password,
+      email: userDetails.email,
+      firstName: userDetails.firstname,
+      lastName: userDetails.lastname,
+      birthDate: userDetails.birthday
+    };
+
+    return this.http.post(apiUrl + 'users', JSON.stringify(userDetails), {
+      headers: new HttpHeaders(
+        {
+          "Content-Type": "application/json"
+        })
+    }).pipe(
       catchError(this.handleError)
     );
   }
@@ -166,6 +181,7 @@ export class UserRegistrationService {
   }
 
   private handleError(error: HttpErrorResponse): any {
+    console.log(error)
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
     } else {
