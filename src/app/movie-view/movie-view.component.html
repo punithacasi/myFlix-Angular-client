@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{this.movie.title}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <b>Genre:</b> {{this.movie.genre.name}}
+        </div>
+        <div>
+            <b>Director:</b> {{this.movie.director.name}}
+        </div>
+        <img src={{movie.imagePath}} alt={{movie.title}} />
+        <p>{{this.movie.description}}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button (click)="closeMessageBox()" color="secondary">
+            Close
+        </button>
+    </mat-card-actions>
+</mat-card>

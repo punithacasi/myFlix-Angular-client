@@ -19,7 +19,7 @@ export class FetchApiDataService {
   }
 
   private getStoredUser(): any {
-    return localStorage.getItem('user');
+    return JSON.parse(localStorage.getItem("user") || "");
   }
 
   // Making the api call for the user registration endpoint
@@ -57,7 +57,7 @@ export class FetchApiDataService {
     return this.http.get(apiUrl + 'movies', {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -70,7 +70,7 @@ export class FetchApiDataService {
     return this.http.get(apiUrl + 'movies/' + title, {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -84,7 +84,7 @@ export class FetchApiDataService {
     return this.http.get(apiUrl + 'movies/director/' + name, {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -98,7 +98,7 @@ export class FetchApiDataService {
     return this.http.get(apiUrl + 'movies/genre/' + name, {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -112,7 +112,7 @@ export class FetchApiDataService {
     return this.http.get(apiUrl + 'users', {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -124,10 +124,11 @@ export class FetchApiDataService {
   public addUserFavoriteMovie(movieId: string) {
     const token = this.getStoredToken();
     let user = this.getStoredUser();
-    return this.http.put(apiUrl + 'users/' + user.username + '/favorite/' + movieId, {
+
+    return this.http.put(apiUrl + 'users/' + user.userName + '/favorite/' + movieId, {}, {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -139,10 +140,11 @@ export class FetchApiDataService {
   public deleteUserFavoriteMovie(movieId: string) {
     const token = this.getStoredToken();
     let user = this.getStoredUser();
-    return this.http.delete(apiUrl + 'users/' + user.username + '/favorite/' + movieId, {
+
+    return this.http.delete(apiUrl + 'users/' + user.userName + '/favorite/' + movieId, {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -154,11 +156,11 @@ export class FetchApiDataService {
   public editUser(userDetails: any): Observable<any> {
     const token = this.getStoredToken();
     let user = this.getStoredUser();
-    return this.http.put(apiUrl + 'users/' + user.username, userDetails, {
+
+    return this.http.put(apiUrl + 'users/' + user.userName, userDetails, {
       headers: new HttpHeaders(
         {
-          "Content-Type": "application/json",
-          Authorization: 'Bearer ' + token
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -173,7 +175,7 @@ export class FetchApiDataService {
     return this.http.delete(apiUrl + 'users/' + user.username, {
       headers: new HttpHeaders(
         {
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         })
     }).pipe(
       map(this.extractResponseData),
@@ -182,7 +184,6 @@ export class FetchApiDataService {
   }
 
   private handleError(error: HttpErrorResponse): any {
-    console.log(error)
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
     } else {

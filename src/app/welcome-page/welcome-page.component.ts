@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class WelcomePageComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
   ngOnInit(): void {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {

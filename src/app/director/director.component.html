@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Director - {{this.movie.director.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <b>Birth:</b> {{this.movie.director.birthDate}}
+        </div>
+        <div *ngIf="this.movie.director.dearthDate">
+            <b>Death:</b> {{this.movie.director.dearthDate}}
+        </div>
+
+        <p> <b>Biography:</b>
+            {{this.movie.director.bio}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="closeMessageBox()" color="secondary">
+            Close
+        </button>
+    </mat-card-actions>
+</mat-card>

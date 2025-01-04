@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Genre - {{this.movie.genre.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p> {{this.movie.genre.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="closeMessageBox()" color="secondary">
+            Close
+        </button>
+    </mat-card-actions>
+</mat-card>
