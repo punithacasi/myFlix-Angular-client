@@ -26,10 +26,20 @@ export class MovieCardComponent implements OnInit {
     this.getMovies();
   }
 
+  /**
+    * Method to safely get the stored user on session to the local variable
+    * @method getStoredUser 
+    */
+  // 
   getStoredUser(): any {
     return JSON.parse(localStorage.getItem("user") || "");
   }
 
+  /**
+    * Method  to call getMovies API and assign data to the movie List variable
+    * Assign favorite flag to the movie variable based on user data 
+    * @method getMovies 
+    */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -43,6 +53,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+    * Method to open dilog with Genre Component 
+    * @method openGenre 
+    */
   openGenre(movieName: any): void {
     this.dialog.open(GenreComponent, {
       width: '400px',
@@ -51,6 +65,11 @@ export class MovieCardComponent implements OnInit {
       }
     })
   }
+
+  /**
+    * Method to open dilog with Director Component  
+    * @method openDirector 
+    */
   openDirector(movieName: any): void {
     this.dialog.open(DirectorComponent, {
       width: '400px',
@@ -59,6 +78,11 @@ export class MovieCardComponent implements OnInit {
       }
     })
   }
+
+  /**
+    * Method to open dilog with MovieView Component   
+    * @method openMovie 
+    */
   openMovie(movieName: any): void {
     this.dialog.open(MovieViewComponent, {
       width: '600px',
@@ -67,6 +91,11 @@ export class MovieCardComponent implements OnInit {
       }
     })
   }
+
+  /**
+    * Method to call add Favorite movie API to save selected movie to user data
+    * @method saveToFav 
+    */
   saveToFav(movieID: any): void {
     this.fetchApiData.addUserFavoriteMovie(movieID).subscribe((resp: any) => {
       this.user.favorite.push(movieID);
@@ -78,6 +107,11 @@ export class MovieCardComponent implements OnInit {
 
     });
   }
+
+  /**
+    * Method to call Favorite movie API to delete selected movie to user data
+    * @method removeFromFav 
+    */
   removeFromFav(movieID: any): void {
     this.fetchApiData.deleteUserFavoriteMovie(movieID).subscribe((resp: any) => {
       this.user.favorite = this.user.favorite.filter((item: any) => item !== movieID);

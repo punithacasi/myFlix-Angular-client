@@ -19,6 +19,11 @@ export class MovieViewComponent implements OnInit {
     this.getMovies();
   }
 
+  /**
+    * Method  to call getMovies API and assign data to the movie List variable
+    * Assign favorite flag to the movie variable based on user data 
+    * @method getMovies 
+    */
   getMovies(): void {
     this.fetchApiData.getMovie(this.data.name).subscribe((resp: any) => {
       this.movie = resp;

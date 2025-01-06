@@ -16,13 +16,21 @@ export class MenuBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+     * Method to call RegistrationDialog and open the diolog with UserRegistrationForm Component 
+     * @method openUserRegistrationDialog 
+     */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       width: '280px'
     });
   }
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * This is the function responsible for sending the form inputs to the backend
+   * @method logout 
+   */
+  // 
   logout(): void {
     localStorage.removeItem("user");
     localStorage.removeItem("token");

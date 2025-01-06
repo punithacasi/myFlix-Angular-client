@@ -17,10 +17,25 @@ export class DirectorComponent implements OnInit {
     public dialogRef: MatDialogRef<DirectorComponent>,
     public fetchApiData: FetchApiDataService) { }
 
+  /**
+   * Initializes the component and performs setup tasks.
+   * 
+   * This lifecycle hook is called after Angular has initialized all data-bound properties of the component.
+   * It is used to trigger actions when the component is created, such as fetching the initial data.
+   * 
+   * @method ngOnInit
+   * 
+   * @public
+   */
   ngOnInit(): void {
     this.getMovies();
   }
 
+  /**
+   * Method to call getMovies API and assign data to the movie list variable
+   * @method getMovies
+   * 
+   */
   getMovies(): void {
     this.fetchApiData.getMovie(this.data.name).subscribe((resp: any) => {
       this.movie = resp;

@@ -20,6 +20,11 @@ export class GenreComponent implements OnInit {
   ngOnInit(): void {
     this.getMovies();
   }
+  /**
+    * Method to call getMovies API and assign data to the movie variable
+    * @method getMovies
+    * 
+    */
 
   getMovies(): void {
     this.fetchApiData.getMovie(this.data.name).subscribe((resp: any) => {
@@ -28,6 +33,11 @@ export class GenreComponent implements OnInit {
     });
   }
 
+  /**
+    * Method to call closeMessageBox on close button events to closethe diolog
+    * @method   closeMessageBox 
+    * 
+    */
   closeMessageBox(): void {
     this.dialogRef.close();
   }
